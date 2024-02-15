@@ -2903,3 +2903,10 @@ function getCountries() {
     ];
     return countries;
 }
+
+function whatAreYouLookingFor(element) {
+        const lookingForThis = element;
+        return lookingForThis
+}
+
+whatAreYouLookingFor('argentina')
