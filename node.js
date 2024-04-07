@@ -20,10 +20,42 @@ const server = http.createServer((req, res) => {
         // Crear el array de datos
         const dataArray = getCountries();
     
-        // Configurar la respuesta para que sea un JSON
+        // req.url === '/countries' && req.method === 'GET'Configurar la respuesta para que sea un JSON
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(dataArray));
-      } else {
+      } else if (req.url === '/countries/asia' && req.method === 'GET') {
+        const dataArray = getCountries();
+        const result = dataArray.filter(obj => obj.region.toLowerCase() === 'asia');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+
+      } else if (req.url === '/countries/europe' && req.method === 'GET') {
+        const dataArray = getCountries();
+        const result = dataArray.filter(obj => obj.region.toLowerCase() === 'europe');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+
+      } else if (req.url === '/countries/americas' && req.method === 'GET') {
+        const dataArray = getCountries();
+        const result = dataArray.filter(obj => obj.region.toLowerCase() === 'americas');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+
+      } else if (req.url === '/countries/oceania' && req.method === 'GET') {
+        const dataArray = getCountries();
+        const result = dataArray.filter(obj => obj.region.toLowerCase() === 'oceania');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+
+      } else if (req.url === '/countries/africa' && req.method === 'GET') {
+        const dataArray = getCountries();
+        const result = dataArray.filter(obj => obj.region.toLowerCase() === 'africa');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+
+      } 
+      
+      else {
         // Si la ruta no es válida, devolver un error 404
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Ruta no encontrada');
@@ -2904,9 +2936,20 @@ function getCountries() {
     return countries;
 }
 
+
+
 function whatAreYouLookingFor(element) {
-        const lookingForThis = element;
-        return lookingForThis
-}
+        const lookingForThis = element.toLowerCase();
+        const whereToLook = getCountries();
+        const foundObject = whereToLook.find(obj => obj.name.toLowerCase() === lookingForThis);
+
+        if (foundObject) {
+                console.log('Object found:', foundObject);
+              } else {
+                console.log('Object not found');
+              }
+        return foundObject
+};
 
 whatAreYouLookingFor('argentina')
+console.log('y ahora que?')
